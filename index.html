@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CryptoFolio - Crypto Portfolio Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Live ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker" id="ticker"><span class="ticker-item">Loading prices...</span></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">
+      <span class="logo">◈</span>
+      <div>
+        <h1>CryptoFolio</h1>
+        <p>Cryptocurrency portfolio tracker (INR)</p>
+      </div>
+    </div>
+    <div class="refresh-info">
+      <span id="status-dot" class="dot"></span>
+      <span id="last-updated">Not updated yet</span>
+      <span>· refresh in <strong id="countdown">60</strong>s</span>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Summary cards -->
+    <section class="summary">
+      <div class="card stat">
+        <span class="label">Total Investment</span>
+        <span class="value" id="total-investment">₹0.00</span>
+      </div>
+      <div class="card stat">
+        <span class="label">Current Value</span>
+        <span class="value" id="current-value">₹0.00</span>
+      </div>
+      <div class="card stat">
+        <span class="label">Profit / Loss</span>
+        <span class="value" id="total-pl">₹0.00</span>
+      </div>
+      <div class="card stat">
+        <span class="label">Return</span>
+        <span class="value" id="total-return">0.00%</span>
+      </div>
+    </section>
+
+    <!-- Investment form -->
+    <section class="card">
+      <h2>Add Investment</h2>
+      <form id="investment-form" class="form-grid" novalidate>
+        <label>Coin
+          <select id="coin-select" required></select>
+        </label>
+        <label>Quantity
+          <input type="number" id="quantity" step="any" min="0" placeholder="e.g. 0.5" required>
+        </label>
+        <label>Buy Price per unit (₹)
+          <input type="number" id="buy-price" step="any" min="0" placeholder="e.g. 4500000" required>
+        </label>
+        <button type="submit" class="btn primary">Add</button>
+      </form>
+    </section>
+
+    <!-- Allocation -->
+    <section class="card">
+      <h2>Portfolio Allocation</h2>
+      <div class="alloc-bar" id="alloc-bar"></div>
+      <div class="alloc-legend" id="alloc-legend"></div>
+    </section>
+
+    <!-- Holdings -->
+    <section class="card">
+      <div class="section-head">
+        <h2>Holdings</h2>
+        <button class="btn" id="export-btn" type="button">Export JSON</button>
+      </div>
+      <div class="table-wrap">
+        <table id="holdings-table">
+          <thead>
+            <tr>
+              <th data-sort="coin">Coin</th>
+              <th data-sort="quantity">Quantity</th>
+              <th data-sort="buyPrice">Buy Price</th>
+              <th data-sort="investment">Invested</th>
+              <th data-sort="current">Current Value</th>
+              <th data-sort="pl">Profit/Loss</th>
+              <th data-sort="ret">Return</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="holdings-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Market -->
+    <section>
+      <div class="section-head">
+        <h2>Market</h2>
+        <input type="search" id="search" placeholder="Search coin or symbol...">
+      </div>
+      <div class="market-grid" id="market-grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    CryptoFolio is a tracking tool only, not an exchange, wallet or investment advice. Data: CoinGecko.
+  </footer>
+
+  <div id="toast-container"></div>
+  <script src="script.js"></script>
+</body>
+</html>
